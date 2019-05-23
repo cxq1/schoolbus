@@ -1,0 +1,97 @@
+{% load staticfiles %}
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <title>Fullscreen Responsive Register Template</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- CSS -->
+        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
+        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Oleo+Script:400,700'>
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body>
+
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="logo span4">
+                        <h1><a href="">iApp Register <span class="red">.</span></a></h1>
+                    </div>
+                    <div class="links span8">
+                        <a class="home" href="" rel="tooltip" data-placement="bottom" data-original-title="Home"></a>
+                        <a class="blog" href="" rel="tooltip" data-placement="bottom" data-original-title="Blog"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="register-container container">
+            <div class="row">
+                <div class="iphone span5">
+                    <img src="{% static 'img/iphone.png' %}" alt="">
+                </div>
+                <div class="register span6">
+                    <form action="{% url 'registered' %}" method="post">
+                        {% csrf_token %}
+                       {% comment %} <h2>请先完成 <span class="red"><strong>注册</strong></span></h2>
+                        <label for="NickName">昵称</label>
+                        <input type="text" id="NickName" name="NickName" placeholder="enter your NickName...">
+                        <label for="UserName">姓名</label>
+                        <input type="text" id="UserName" name="UserName" placeholder="enter your UserName...">
+                        <label for="Sex">性别</label>
+                        <input type="text" id="Sex" name="Sex" placeholder="choose a Sex...">
+                        <label for="UserId">学号/工号</label>
+                        <input type="text" id="UserId" name="UserId" placeholder="enter your UserId...">
+                         <label for="MajorGrade">专业年级</label>
+                        <input type="text" id="MajorGrade" name="MajorGrade" placeholder="enter your Major and Grade...">
+                         <label for="Tel">手机</label>
+                        <input type="text" id="Tel" name="Tel" placeholder="enter your Telephone Number...">
+                         <label for="Identity">身份</label>
+                        <input type="text" id="Identity" name="Identity" placeholder="enter your rel Identity...">
+                         <label for="Password">密码</label>
+                        <input type="password" id="Password" name="Password" placeholder="enter your password...">
+                         <label for="Password1">确认密码</label>
+                        <input type="password" id="Password1" name="Password1" placeholder="confirm your password again...">
+                        <button type="submit">REGISTER</button>
+                        <button type="button"><a href="/user/home.html">点我进百度</a> </button>{% endcomment %}
+                        {{ form }}
+                        <input type="submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Javascript -->
+        <script src="{% static 'js/jquery-1.8.2.min.js' %}"></script>
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/jquery.backstretch.min.js' %}"></script>
+        <script src="{% static 'js/scripts.js' %}"></script>
+        <script>
+        function checkPwd(){
+            var test = document.getElementById("password").value;
+            var test1 = document.getElementById("password1").value;
+            if(test!=test1){
+                alert("两次输入密码不一致")
+                return false;
+            }
+            else{return true}
+            }
+        </script>
+    </body>
+
+</html>
+
