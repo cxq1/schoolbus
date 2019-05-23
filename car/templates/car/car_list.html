@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CARLIST</title>
+</head>
+<body>
+    <h3>汽车列表：</h3>
+    {% for car in cars %}
+    <a href="{% url 'car-detail' car.id %}?from={{ request.get_full_path }}">车牌号:{{ car.car_num }}<br></a>
+
+        座位数:{{ car.set_num }}<br>
+        用车类型{{ car.car_type }}<br>
+        预约数：{{ due_num }}
+        <form action="{% url 'due-center' %}?from={{ request.get_full_path }}" method="get">
+            <input type="submit" value="是否预约">
+        </form>
+
+       <hr>
+    {% endfor %}
+<a href="{% url 'shift-list'  %}">返回</a>
+</body>
+</html>

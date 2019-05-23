@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<label>
+    <form method="get" action="{% url 'shift-list' %}">
+    {% csrf_token %}
+    <select name="dropdown">
+        {% for path in pathes %}
+            <option id="path" value="{{ path.path_name }}" selected="">
+                {{ path.path_name }}
+            </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="确定">
+</form>
+{% for shift in shifts %}
+    <a href="{% url 'car-list' shift.id %}">{{ shift.times }}<br></a>
+{% endfor %}
+</label>
+
+</body>
+</html>

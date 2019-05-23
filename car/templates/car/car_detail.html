@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    车牌号:{{ car.car_num}}<br>
+     驾驶员:{{ car.driver}}<br>
+    驾驶员电话:{{ car.driver_phone }}<br>
+    座位数:{{ car.set_num }}<br>
+    价格:{{ car.price}}<br>
+    公告:<br>
+    <textarea>{{ car.notice }}</textarea><br>
+
+    用车类型:{{ car.car_type}}<br>
+    用车状态:{{ car.car_state}}<br>
+    <h3>汽车班次信息</h3>
+    {% for shift in shifts %}
+        <a href="{% url 'shift-detail' shift.id %}">班车时间：{{ shift.times }}<br></a>
+        时长：{{ shift.duration }}<br>
+    {% endfor %}
+    <a href="{{ back }}">返回</a>
+</body>
+</html>

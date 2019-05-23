@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+班车时间:{{ shift.times }}<br>
+时长{{ shift.duration }}<br>
+路径：{{ shift.path.path_name }}<br>
+汽车：
+{% for car in cars %}
+    <a href="{% url 'car-detail' car.id %}">{{ car.car_num }}</a>
+{% endfor %}
+<p>是否约车</p>
+<form action="#">
+    <input type="hidden" value="" name="">
+    <input type="submit" value="确定">
+</form>
+</body>
+</html>
