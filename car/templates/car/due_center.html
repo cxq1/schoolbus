@@ -5,11 +5,16 @@
     <title>Title</title>
 </head>
 <body>
+<b>用户中心</b><br>
 {% for d in due %}
+
+    {{ d.time_flag }}
     预约的时间段：{{ d.shift.times }}<a href="{% url 'cancel-due' d.id %}">取消预约</a> <br>
     用户：{{ d.user.username }}<br>
     创建时间：{{ d.created_time }}<br>
 {% endfor %}
+<b>消息中心</b>
+
 <a href="{% url 'shift-list' %}">返回</a>
 
 </body>

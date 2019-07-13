@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'xadmin',
     'crispy_forms',
     'car.templatetags',
+    'djcelery',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +123,27 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'user.User'
+
+# celery settings
+# celery中间人 redis://redis服务所在的ip地址:端口/数据库号
+BROKER_URL = 'redis://localhost:6379/0'
+# celery结果返回，可用于跟踪结果
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+# celery内容等消息的格式设置
+CELERY_ACCEPT_CONTENT = ['application/json', ]
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+# celery时区设置，使用settings中TIME_ZONE同样的时区
+CELERY_TIMEZONE = TIME_ZONE
+
+#Email设置
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST= 'smtp.qq.com'#以QQ邮箱为例，SMTP服务器(邮箱需要开通SMTP服务)
+EMAIL_PORT= 25         #QQ邮箱SMTP服务端口
+EMAIL_HOST_USER = '1986541495@qq.com'  #我的QQ邮箱帐号
+EMAIL_HOST_PASSWORD = 'fjndhbcfnxwsbbig' #SMTP服务授权码
+EMAIL_SUBJECT_PREFIX = 'website' #为邮件标题的前缀,默认是'[django]'
+EMAIL_USE_TLS = True #开启安全链接
+DEFAULT_FROM_EMAIL = SERVER_EMAIL = EMAIL_HOST_USER #设置发件人

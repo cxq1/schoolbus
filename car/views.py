@@ -1,11 +1,15 @@
 import datetime
 import time
 
+from django.conf import settings
 from django.core.cache import cache
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views import View
 from django.views.generic import DetailView, ListView, TemplateView
+
+
+from .tasks import send_email_by_celery
 from car.models import Car,Autoshift,CarAndShift,PathType
 
 class CancelDueView(TemplateView):
@@ -25,7 +29,19 @@ class AddDueView(TemplateView):
         response = super(AddDueView, self).get(request,*args,**kwargs)
 
         self.handle_due()
+
         return response
+
+    def send_email(self):
+        shift_id = self.request.session['shift_id']
+        shift = Autoshift.objects.filter(id=shift_id)[0]
+
+        subject = '预约消息'
+        html_content = '<p>您已经预约了' + str(shift.times) + '车，请记得及时上车</p>'
+        send_from = settings.DEFAULT_FROM_EMAIL
+        email = self.request.user.email
+        to_list = [email,]
+        send_email_by_celery.delay(subject, html_content, send_from, to_list)
 
     def handle_due(self):
         increase_due = False
@@ -46,6 +62,7 @@ class AddDueView(TemplateView):
                 due.due_num = 1
                 due.created_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 due.save()
+                # self.send_email()
             else:
                 pass #返回登录页面
 
@@ -55,9 +72,15 @@ class AddDueView(TemplateView):
         shift = Autoshift.objects.filter(id=shift_id)[0]
         # if self.request.session['due_num']>shift.car.
         #创建预约
+        now_time= datetime.datetime.strftime(datetime.datetime.today(),"%Y-%m-%d")
+        end_time = datetime.datetime.strftime(shift.times+datetime.timedelta(days=3),"%Y-%m-%d")
+        time_flag = now_time>end_time
 
         due =CarAndShift.objects.filter(shift=shift,user=self.request.user)#差一个user
+        due.time_flag = time_flag
         context['due']=due
+
+        context['now_time'] =now_time
 
         return context
 
