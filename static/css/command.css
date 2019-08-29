@@ -3712,7 +3712,7 @@ table tr td select {
 .t-list td {
 	border-right: 1px solid #b0cedd;
 	border-top: 1px solid #b0cedd;
-	color: #999;
+	/*color: #999;*/
 	height: 36px;
 	padding: 2px 0;
 	text-align: center

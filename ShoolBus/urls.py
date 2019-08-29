@@ -16,9 +16,10 @@ Including another URLconf
 import xadmin
 from django.contrib import admin
 from django.urls import path,include
-
+from . import views
 urlpatterns = [
     path('admin/', xadmin.site.urls),
     path('car/',include('car.urls')),
     path('user/',include('user.urls')),
+    path("",views.index),
 ]

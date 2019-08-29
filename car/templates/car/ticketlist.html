@@ -1,17 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" isELIgnored="false"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+{% load staticfiles %}
 <html>
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>车票列表</title>
-		<link rel="stylesheet" type="text/css" href="css/header.css" />
-		<link rel="stylesheet" type="text/css" href="css/iconfont.css" />
-		<link rel="stylesheet" type="text/css" href="css/command.css" />
-		<link rel="stylesheet" type="text/css" href="css/clear.css"/>
-		<link rel="stylesheet" type="text/css" href="css/index.css"/>
-		<script src="jquery-1.11.3/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %} " />
+
+		<link rel="stylesheet" type="text/css" href="{% static 'css/iconfont.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'css/command.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'css/clear.css' %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}"/>
+        <script src="{% static 'js/jquery-1.8.2.min.js' %}" type="text/javascript" charset="utf-8"></script>
+
 		 <style>
             * {margin: 0;padding: 0}
             #calendar {width: 300px;margin: 100px auto;overflow: hidden;border: 1px solid #000;padding: 20px;position: relative;z-index: 999;background: #fff;}
@@ -56,6 +56,9 @@
             #flip_cities{
             	letter-spacing: 0.3em;
             }
+             #tbody th {
+                 color: #191819;
+             }
         </style>
         <script type="text/javascript">
             $(function() {
@@ -138,7 +141,7 @@
 
 	<body>
 		<!-- 页面加载进度 -->
-		<div id="page-loading" class="page-loading"></div>
+{#		<div id="page-loading" class="page-loading"></div>#}
 		<!-- 头部 -->
 		<div class="header">
 			<div class="header">
@@ -146,14 +149,14 @@
 					<!-- 头部内容 -->
 					<div class="header-con">
 						<h1 class="logo">
-                <a name="g_href" data-type="1" data-href="index.html" data-redirect="Y" href="index.jsp">中国铁路12306</a>
+                <a name="g_href" data-type="1" data-href="index.html" data-redirect="Y" style="background-image: url({% static 'img/headlogo.png' %}) ;width: 320px;height: 60px;" href="">中国铁路12306</a>
             </h1>
-						<div class="header-right">
+						<div class="header-right" style="width: 810px;">
 							<!-- 搜索条 -->
 							<div class="header-search">
 								<div class="search-bd">
 									<input type="password" value="" style="display:none">
-									<input type="text" class="search-input" id="search-input" value="" placeholder="搜索车票/餐饮/常旅客/相关规章" auto-complete="new-password">
+									<input type="text" class="search-input" id="search-input" value="" placeholder="搜索车票/旅游景点" auto-complete="new-password">
 									<!-- 搜索提示 -->
 									<div class="search-down">
 										<a href="javascript:;" class="close">关闭</a>
@@ -175,26 +178,17 @@
 							<!-- 右侧菜单 -->
 							<ul class="header-menu">
 								<li class="menu-item menu-nav">
-									<a name="g_href" data-type="2" data-href="view/index.html" data-redirect="Y" href="javascript:;" class="menu-nav-hd">我的12306
+									<a name="g_href" data-type="2" data-href="view/index.html" data-redirect="Y" href="javascript:;" class="menu-nav-hd">个人中心
 										<i class="caret"></i>
 									</a>
 									<ul class="menu-nav-bd">
 										<li>
-											<a name="g_href" data-type="2" data-href="view/train_order.html" data-redirect="Y" href="OrderConfirm.jsp">火车票订单</a>
+											<a name="g_href" data-type="2" data-href="view/train_order.html" data-redirect="Y" href="{% url 'deal-due' %}">车票订单</a>
 										</li>
-										<li>
-											<a name="g_href" data-type="2" data-href="view/lineUp_order.html" data-redirect="Y" href="javascript:;">候补订单</a>
-										</li>
-										<li>
-											<a name="g_href" data-type="2" data-href="view/personal_travel.html" data-redirect="Y" href="javascript:;">我的行程</a>
-										</li>
+
+
 										<li class="nav-line"></li>
-										<li>
-											<a name="g_href" data-type="10" data-href="queryMyOrder.html" data-redirect="Y" href="javascript:;">我的餐饮•特产</a>
-										</li>
-										<li>
-											<a name="g_href" data-type="2" data-href="view/my_insurance.html" data-redirect="Y" href="javascript:;">我的保险</a>
-										</li>
+
 										<li>
 											<a name="g_href" data-type="3" data-href="welcome.html" data-redirect="Y" href="javascript:;">我的会员</a>
 										</li>
@@ -202,31 +196,21 @@
 										<li>
 											<a name="g_href" data-type="2" data-href="view/information.html" data-redirect="Y" href="javascript:;">查看个人信息</a>
 										</li>
-										<li>
-											<a name="g_href" data-type="2" data-href="view/userSecurity.html" data-redirect="Y" href="javascript:;">账户安全</a>
-										</li>
+
 										<li class="nav-line"></li>
-										<li>
-											<a name="g_href" data-type="2" data-href="view/passengers.html" data-redirect="Y" href="javascript:;">常用联系人</a>
-										</li>
-										<li>
-											<a name="g_href" data-type="2" data-href="view/address_init.html" data-redirect="Y" href="javascript:;">车票快递地址</a>
-										</li>
-										<li class="nav-line"></li>
-										<li>
-											<a name="g_href" data-type="2" data-href="view/icentre_serviceQuery.html" data-redirect="Y" href="javascript:;">温馨服务查询</a>
-										</li>
+
 									</ul>
 								</li>
 								<li class="menu-item menu-line">|</li>
-								<li id="J-header-login" class="menu-item menu-login">
-									<a name="g_href" data-type="2" data-href="resources/login.html" data-redirect="Y" href="login.jsp">登录</a>
-									<a name="g_href" data-type="2" data-href="regist/init" data-redirect="Y" href="register.jsp" class="ml">注册</a>
-								</li>
+
 								<li id="J-header-logout" style="display: none;" class="menu-item menu-nav menu-login">
 									您好，
-									<a name="g_href" id="username" data-type="2" data-href="view/index.html" data-redirect="Y" href="javascript:;" class="txt-primary menu-nav-my-hd">${sessionScope.name }</a>&nbsp;|&nbsp;
-									<a class="logout" href="javascript:;" id="logout">退出</a>
+                                        {% if user.is_authenticated %}
+                                        <a name="g_href" id="username" data-type="2" data-href="view/index.html" data-redirect="Y" href="javascript:;" class="txt-primary menu-nav-my-hd">{{ user.username }}</a>&nbsp;|&nbsp;
+                                        <a class="logout" href="{% url 'logout' %}" id="logout">退出</a>
+                                    {% else %}
+                                        <a href="{% url 'login' %}">登录</a>
+                                    {% endif %}
 								</li>
 							</ul>
 						</div>
@@ -236,7 +220,7 @@
 				<div class="nav-box">
 					<ul class="nav">
 						<li id="J-index" class="nav-item nav-item-w1">
-							<a name="g_href" data-type="1" data-href="index.html" data-redirect="Y" href="index.jsp" class="nav-hd">首页</a>
+							<a name="g_href" data-type="1" data-href="index.html" data-redirect="Y" href="{% url 'shift-list' %}" class="nav-hd">首页</a>
 						</li>
 						<li id="J-chepiao" class="nav-item nav-item-w1">
 							<a href="javascript:void(0)" class="nav-hd">车票
@@ -247,7 +231,7 @@
 									<h3 class="nav-tit">购买</h3>
 									<ul class="nav-con">
 										<li class="nav_dan">
-											<a name="g_href" data-type="2" data-href="leftTicket/init?linktypeid=dc" data-redirect="Y" href="ticketlist.jsp">单程</a>
+											<a name="g_href" data-type="2" data-href="leftTicket/init?linktypeid=dc" data-redirect="" href="{% url 'shift-list' %}">单程</a>
 										</li>
 										<li class="nav_wang">
 											<a name="g_href" data-type="2" data-href="leftTicket/init?linktypeid=wf" data-redirect="Y" href="javascript:;">往返</a>
@@ -273,23 +257,7 @@
 										<li></li>
 									</ul>
 								</div>
-								<div class="nav-bd-item nav-col2">
-									<h3 class="nav-tit border-none">更多</h3>
-									<ul class="nav-con">
-										<li>
-											<a name="g_href" data-type="1" data-href="view/ticket/zt_card.html" data-redirect="Y" href="javascript:;">中铁银通卡</a>
-										</li>
-										<li class="border-none">
-											<a name="g_href" data-type="1" data-href="view/ticket/through_train.html" data-redirect="Y" href="javascript:;">广九直通车</a>
-										</li>
-										<li>
-											<a name="g_href" data-type="1" data-href="view/ticket/railway.html" data-redirect="Y" href="javascript:;">市郊快速铁路</a>
-										</li>
-										<li>
-											<a name="g_href" data-type="1" data-href="view/ticket/international_train.html" data-redirect="Y" href="javascript:;">国际列车</a>
-										</li>
-									</ul>
-								</div>
+
 							</div>
 						</li>
 						<li id="J-tuangoufuwu" class="nav-item ">
@@ -382,7 +350,7 @@
 							</div>
 						</li>
 						<li id="J-shanlvfuwu" class="nav-item ">
-							<a href="javascript:void(0) " class="nav-hd ">商旅服务
+							<a href="javascript:void(0) " class="nav-hd ">兰溪旅游服务
 								<i class="icon icon-down "></i>
 							</a>
 							<div class="nav-bd ">
@@ -402,7 +370,7 @@
 							</div>
 						</li>
 						<li id="J-chuxingzhinan" class="nav-item ">
-							<a href="javascript:void(0) " class="nav-hd ">出行指南
+							<a href="javascript:void(0) " class="nav-hd ">兰溪出行指南
 								<i class="icon icon-down "></i>
 							</a>
 							<div class="nav-bd ">
@@ -427,42 +395,7 @@
 										<li></li>
 									</ul>
 								</div>
-								<div class="nav-bd-item nav-col2 ">
-									<h3 class="nav-tit ">旅客须知</h3>
-									<ul class="nav-con ">
-										<li>
-											<a name="g_href" data-type="2" data-href="gonggao/usersNeedToKnow.html?linktypeid=txt" data-redirect="Y" href="javascript:;">铁路电子客票</a>
-										</li>
-										<li>
-											<a name="g_href" data-type="2" data-href="gonggao/saleTicketMeans.html?linktypeid=means5" data-redirect="Y" href="javascript:;">身份核验</a>
-										</li>
-										<li>
-											<a name="g_href" data-type="2" data-href="gonggao/help.html" data-redirect="Y" href="javascript:;" class="txt-lighter">更多>></a>
-										</li>
-										<li></li>
-									</ul>
-								</div>
-								<div class="nav-bd-item nav-col2 ">
-									<h3 class="nav-tit border-none ">相关章程</h3>
-									<ul class="nav-con ">
-										<li>
-											<a name="g_href" data-type="2" data-href="gonggao/saleTicketMeans.html?linktypeid=means1" data-redirect="Y" href="javascript:;">铁路互联网售票暂行办法</a>
-										</li>
-										<li class="border-none">
-											<a name="g_href" data-type="2" data-href="gonggao/saleTicketMeans.html?linktypeid=means2" data-redirect="Y" href="javascript:;">铁路旅客运输规程</a>
-										</li>
-										<li style="text-overflow:ellipsis;white-space:nowrap;">
-											<a name="g_href" data-type="2" data-href="gonggao/saleTicketMeans.html?linktypeid=means6" data-redirect="Y" href="javascript:;">铁路进站乘车禁止和限制携带品公告</a>
-										</li>
-										<li class="border-none" style="text-overflow:ellipsis;white-space:nowrap;">
-											<a name="g_href" data-type="2" data-href="gonggao/saleTicketMeans.html?linktypeid=means7" data-redirect="Y" href="javascript:;">广深港高速铁路跨境旅客运输组织规则</a>
-										</li>
-										<li>
-											<a name="g_href" data-type="2" data-href="gonggao/help.html" data-redirect="Y" href="javascript:;" class="txt-lighter">更多>></a>
-										</li>
-										<li></li>
-									</ul>
-								</div>
+
 							</div>
 						</li>
 						<li id="J-xinxichaxun" class="nav-item last ">
@@ -518,96 +451,102 @@
 					</ul>
 				</div>
 			</div>
-
 		</div>
-		<div class="lay-sear lay-sear-yp clearfix" style="text-align: center;">
+        <form action="{% url 'query-shift' %}" method="post">
+            {% csrf_token %}
+            <div class="lay-sear lay-sear-yp clearfix" style="text-align: center;">
 		<div class="boxs">
-			<span>*</span>出发地：<input name="fromStation" id="fromStation" type="hidden" />
-			<input name="fromStationText" maxlength="15" placeholder="简码/汉字" id="fromStationText" style="width:100px;" class="input_20txt_gray" type="text" />
-			<div id="fromStationShow" style="display: none;">
-				<h4 id="top_cities">简码/汉字</h4>
-				<div id="panel_cities">
-				</div>
-				<div id="flip_cities">
-					<a href class="cur" onclick="">1</a>
-					<a href onclick="">2</a>
-					<a href onclick="">3</a>
-					<a href onclick="">4</a>
-					<a href onclick="">5</a>
-					<a href class="pagetxt" onclick="">>></a>
-				</div>
-			</div>
+			<span>*</span>路线：<input readonly name="fromStation" id="fromStation" type="text" value="{{ path }}" />
 		</div>
-		
-		
-		
-		<span>*</span>目的地：<input name="toStation" id="toStation" type="hidden" />
-		<input name="toStationText" maxlength="15" placeholder="简码/汉字" id="toStationText" style="width:100px;" class="input_20txt_gray" type="text" />
-		<div class="boxs">
-		出发日： <input type="text" value="2016-4-11"
-			class="input_20txt_gray" id="train_start_date" maxlength="15">&nbsp;&nbsp;
-			
-			<div id="calendar" style="display:none">
-            <h4>2013年10月</h4>
-            <a href="##" class="a1">上月</a>
-            <a href="##" class="a2">下月</a>
-            <ul class="week">
-                <li>日</li>
-                <li>一</li>
-                <li>二</li>
-                <li>三</li>
-                <li>四</li>
-                <li>五</li>
-                <li>六</li>
 
-            </ul>
-            <ul class="dateList"></ul>
-        </div>
-		</div>
-		 
-		<a shape="rect" class="btn122s" href="javascript:void(0);"
-			onclick="searchTrain('ADULT')"><font color="#ffffff">查询</font></a>&nbsp;&nbsp; <a shape="rect"
+		<div class="boxs">
+		出发日： <input type="date"  name="start_date"
+			 id="train_start_date" maxlength="15">&nbsp;&nbsp;
+
+        <input type="submit" shape="rect" class="btn122s" value="查询">
+{#		<a href="javascript:void(0);"#}
+{#			onclick="searchTrain('ADULT')"><font color="#ffffff">查询</font>#}
+{#        </a>&nbsp;&nbsp;#}
+            {% comment %}<a shape="rect"
 			class="btn122s" href="javascript:void(0);"
-			onclick="searchTrain('0X00')"><font color="#ffffff">查询学生票</font></a>
+			onclick="searchTrain('0X00')"><font color="#ffffff">查询学生票</font></a>{% endcomment %}
 	</div>
-	<div class="sear-sel-bd" id="sear-sel-bd" style="height: 44px;">
-		<!--展开式高度设置为272px，合拢时为72px,一行行高为34，可计算下-->
-		<div
-			style=" width: 100px; height: 18px; line-height: 18px; padding: 2px 0; float: left; text-align: right; font-weight: 700; font-size: 0.9em">车次类型：</div>
-		<input type="checkbox" class="div-font"/>GC-高铁/城际 <input type="checkbox" />D-动车 <input
-			type="checkbox" />Z-直达 <input type="checkbox" />T-特快 <input
-			type="checkbox" />K-快速 <input type="checkbox" />其他 车次：<input
-			type="text" style="width: 100px;" />
-	</div>
+        <div class="sear-sel-bd" id="sear-sel-bd" style="height: 44px;">
+            <!--展开式高度设置为272px，合拢时为72px,一行行高为34，可计算下-->
+            <div
+                style=" width: 100px; height: 18px; line-height: 18px; padding: 2px 0; float: left; text-align: right; font-weight: 700; font-size: 0.9em">车次类型：</div>
+            <input name="car_type" type="radio" class="div-font" value="2"/>高速 <input name="car_type" type="radio" value="1" />普通
+        </div>
+        </form>
+
 	<div class="t-list  mt10">
 		<table width="100%" id="listTable">
 			<thead id="thead">
 				<tr style="text-align: center;font-size: 0.8em">
-					<th>车次</th>
-					<th>出发站<br>到达站</th>
-					<th>出发时间<br>到达时间</th>
+					<th>车牌号</th>
+					<th>路线</th>
+					<th>出发时间</th>
 					<th>历时</th>
-					<th>商务座</th>
-					<th>一等座</th>
-					<th>二等座</th>
-					<th>高级软卧</th>
-					<th>软卧</th>
-					<th>动卧</th>
-					<th>硬卧</th>
-					<th>软座</th>
-					<th>硬座</th>
-					<th>无座</th>
-					<th>其它</th>
+                    <td>用车类型</td>
+                    <th>座位数</th>
+                    <th>价格</th>
+                    <th>用车状态</th>
+                    <th>已预约人数</th>
 					<th>备注</th>
+                    <td>是否预约</td>
 				</tr>
+
 			</thead>
-			<tbody id="tbody" style="text-align: center;"></tbody>
+
+			<tbody id="tbody" style="text-align: center;">
+            {% for shift in shifts %}
+                {% for c in shift.car.all %}
+                <tr>
+                <form method="post" action="{% url 'deal-due' %}" id="order_form">
+                    {% csrf_token %}
+                <input type="hidden" value="{{ shift.id }}" name="shift_id">
+                    <td><input type="hidden" value="{{ c.car_num }}" name="car_num" readonly>{{ c.car_num }}</td>
+                <td><input type="hidden" value="{{ path }}" name="path">  {{ path }}</td>
+                <td><input type="hidden" value="{{ shift.times }}" name="times">{{ shift.times }}</td>
+                <td><input type="hidden" value="{{ shift.duration }} min" name="duration">{{ shift.duration }} min</td>
+                    {% if  c.car_type == 1  %}
+                        <th><input type="hidden" value="1" name="car_type">普通校车</th>
+                        {% else  %}
+                        <th><input type="hidden" value="2" name="car_type">教师用车</th>
+                    {% endif %}
+
+                <th>{{ c.set_num }}</th>
+                <th>{{ c.price }}</th>
+                <input type="hidden" value="{{ c.car_state }}" name="car">
+                {% if  c.car_state == 1  %}
+                    <th> 正常发车</th>
+                    {% else %}
+                    <td>人数太少不发车</td>
+                {% endif %}
+                <th>{{ due_num }}</th>
+                <td>{{ c.notice }}</td>
+                <td><input id="due_btn" type="button" value="预约"></td>
+                </form>
+                <script>
+                   $(document).ready(function(){
+	                    $("#due_btn").click(function () {
+                            $("#order_form").submit()
+	                        if(confirm("是否预约")){
+                            }
+                        })
+                    });
+                </script>
+                </tr>
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+
 		</table>
 	</div>
 
 	<!-- 遮罩 -->
 	<div class="dhx_modal_cover" style="display: none; text-align: center margin-top: 20dp;">
-		<img alt="" src="img/loading.gif" style="margin-top: 240px;">
+		<img alt="" src="{% static 'img/lvyou.png' %}" style="margin-top: 240px;">
 	</div>
 				<script type="text/javascript">
 					/* 登录显示昵称  */
@@ -639,67 +578,19 @@
 					});
 				</script>
 				<script type="text/javascript">
-					$(function(){
-						$('#page-loading').hide();
-					});
-					$('#train_start_date').click(function(){
-						$('#calendar').show();
-					});
-					$('#train_start_date').blur(function(){
-						$('#calendar').hide();
-					});
+					{#$(function(){#}
+					{#	$('#page-loading').hide();#}
+					{#});#}
+					{#$('#train_start_date').click(function(){#}
+					{#	$('#calendar').show();#}
+					{#});#}
+					{#$('#train_start_date').blur(function(){#}
+					{#	$('#calendar').hide();#}
+					{#});#}
 				</script>
 				<script type="text/javascript">
 					/*  搜索列车   */
-					function searchTrain(purpose_codes){
-						var leftTicketDTO ={
-							train_date:$('#train_start_date').val(),
-							from_station:$('#fromStationText').val(),
-							to_station:$('#toStationText').val(),
-							purpose_codes:purpose_codes
-						};
-						$('#tbody').empty();
-						var url = 'queryZ?leftTicketDTO.train_date=' + leftTicketDTO.train_date + '&leftTicketDTO.from_station='+
-						leftTicketDTO.from_station + '&leftTicketDTO.to_station=' + leftTicketDTO.to_station 
-						+ '&leftTicketDTO.purpose_codes='+leftTicketDTO.purpose_codes
-						$.ajax({
-							type:"get",
-							url:url,
-							async:true,
-							success:function(data){
-								console.log(data);
-								console.log(typeof data);
-								console.log(data.trim() == '当前暂无列车');
-								if(data.trim() == '当前暂无列车'){
-									alert('当前暂无列车');
-									return;
-								}
-								var list = eval("(" + data + ")");
-								var $tboby = $('#tbody');
-								
-								for(var i = 0;i < list.length; i++){
-									if(list[i] == "|列车运行图调整"){
-										continue;
-									}
-									var ticket = list[i].split("|");
-									if(ticket[0] == '暂停发售') continue;
-									$tr = $("<tr id='ticket_"+ticket[2]+"'><td><div>"+ticket[3]
-									+"</div><span id='"+ticket[2]+"_"+ticket[16]+"_"+ticket[17]+"_"+
-									ticket[35]+"_"+leftTicketDTO.train_date+
-									"'class='lookup' onclick='showTicketPrice(this)'> <b title='收起票价' class='open'></b></span>"
-									+"</td>"+"<td>"+leftTicketDTO.from_station+"  "+leftTicketDTO.to_station +"</td>"
-									+"<td>"+ticket[8]+"  "+ticket[9]+"</td>"+"<td>"+
-									ticket[10]+"</td>"+"<td>"+(ticket[25] === '' ? ticket[32]===''?'--':ticket[32] : ticket[25])
-									+"</td>"+hasTrain(ticket[31])+hasTrain(ticket[30])
-									+hasTrain(ticket[21])+hasTrain(ticket[23])+hasTrain(ticket[33])+hasTrain(ticket[28])+hasTrain(ticket[24])
-									+hasTrain(ticket[29])+hasTrain(ticket[26])
-									+"<td>"+""+"</td>"+isOrder(leftTicketDTO.train_date,ticket)+"</tr>");
-									
-									$tboby.append($tr);
-								}
-							}
-						});
-					}
+
 					
 					function isOrder(time,ticket){
 						if(ticket[1] != "预订"){
