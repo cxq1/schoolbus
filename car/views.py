@@ -31,7 +31,7 @@ class DealDue(FormView):
 
             if not cache.get(due_key):
                 increase_due = True
-                cache.set(due_key, 1,   60*60)
+                cache.set(due_key, 1, 60)
             if increase_due:
                 if self.request.user.is_authenticated:
 
