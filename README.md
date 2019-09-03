@@ -15,3 +15,4 @@ git clone https://github.com/cxq1/schoolbus.git  [解决git 下载慢](https://b
 启动项目：python manage.py runserver  
 后台页面：http://127.0.0.1:8000/admin/  
 注册的时候年级和身份填 【1-3】  
+测试数据要先在后台添加 创建的超级管理员要加学号，才能在页面登陆
